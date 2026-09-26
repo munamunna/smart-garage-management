@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import authRoutes from "./modules/auth/auth.routes.js";
+import { errorHandler } from "./middleware/error.middleware.js";
 
 const app = express();
 
@@ -14,5 +16,9 @@ app.get("/api/health", (_req, res) => {
     message: "Smart Garage API is running",
   });
 });
+
+app.use("/api/auth", authRoutes);
+
+app.use(errorHandler);
 
 export default app;
